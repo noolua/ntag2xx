@@ -47,6 +47,11 @@ NfcTag MifareUltralight::read(byte * uid, unsigned int uidLength)
     {
         // read the data
         success = nfc->mifareultralight_ReadPage(page, &buffer[index]);
+        // if failed, try again
+        if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
+        // if failed, try again
+        if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
+
         if (success)
         {
             #ifdef MIFARE_ULTRALIGHT_DEBUG
