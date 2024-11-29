@@ -32,6 +32,7 @@ void NfcAdapter::begin(boolean verbose)
     shield->SAMConfig();
 }
 
+
 boolean NfcAdapter::tagPresent(unsigned long timeout)
 {
     uint8_t success;
@@ -45,6 +46,19 @@ boolean NfcAdapter::tagPresent(unsigned long timeout)
     {
         success = shield->readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, (uint8_t*)&uidLength, timeout);
     }
+    return success;
+}
+
+boolean NfcAdapter::tagPresentEx(unsigned long timeout, byte *uidout, int *uid_len){
+    boolean success = tagPresent(timeout);
+
+    if(uidout && uid_len && success){
+        if(*uid_len > uidLength){
+            memcpy(uidout, uid, uidLength);
+            *uid_len = uidLength;
+        }
+    }
+
     return success;
 }
 

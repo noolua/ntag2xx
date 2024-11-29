@@ -39,7 +39,7 @@ NfcTag MifareUltralight::read(byte * uid, unsigned int uidLength)
         return NfcTag(uid, uidLength, NFC_FORUM_TAG_TYPE_2, message);
     }
 
-    boolean success;
+    boolean success = false;
     uint8_t page;
     uint8_t index = 0;
     byte buffer[bufferSize];
@@ -51,6 +51,10 @@ NfcTag MifareUltralight::read(byte * uid, unsigned int uidLength)
         if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
         // if failed, try again
         if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
+        // // if failed, try again
+        // if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
+        // // if failed, try again
+        // if(!success) nfc->mifareultralight_ReadPage(page, &buffer[index]);
 
         if (success)
         {
