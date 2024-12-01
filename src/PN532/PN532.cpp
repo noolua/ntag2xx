@@ -269,6 +269,16 @@ bool PN532::setPassiveActivationRetries(uint8_t maxRetries)
     return (0 < HAL(readResponse)(pn532_packetbuffer, sizeof(pn532_packetbuffer)));
 }
 
+bool PN532::SetHighSerialBaudRate(){
+    pn532_packetbuffer[0] = PN532_COMMAND_SETSERIALBAUDRATE;
+    pn532_packetbuffer[1] = 0x05;  // 0x04 = 115200(default), 0x05 = 230400, 0x06 = 460800
+
+    if (HAL(writeCommand)(pn532_packetbuffer, 2))
+        return 0x0;  // no ACK
+
+    return (0 < HAL(readResponse)(pn532_packetbuffer, sizeof(pn532_packetbuffer)));
+}
+
 /***** ISO14443A Commands ******/
 
 /**************************************************************************/

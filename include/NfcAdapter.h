@@ -26,6 +26,8 @@ class NfcAdapter {
 
         ~NfcAdapter(void);
         void begin(boolean verbose=true);
+        void setPassiveActivationRetries(byte maxRetries);
+        void setHSUHighSpeed();
         boolean tagPresent(unsigned long timeout=0); // tagAvailable
         boolean tagPresentEx(unsigned long timeout=0, byte *uid=NULL, int *uid_len=NULL); // tagAvailable
         NfcTag read();

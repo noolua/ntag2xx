@@ -31,7 +31,13 @@ void NfcAdapter::begin(boolean verbose)
     // configure board to read RFID tags
     shield->SAMConfig();
 }
+void NfcAdapter::setPassiveActivationRetries(byte maxRetries){
+    shield->setPassiveActivationRetries(maxRetries);
+}
 
+void NfcAdapter::setHSUHighSpeed(){
+    shield->SetHighSerialBaudRate();
+}
 
 boolean NfcAdapter::tagPresent(unsigned long timeout)
 {
